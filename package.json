@@ -45,7 +45,9 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {},
+    "rules": {
+      "linebreak-style": 0
+    },
     "overrides": [
       {
         "files": [
