@@ -7,21 +7,17 @@
 </template>
 
 <style lang="scss">
-html, head, body {
+html, body {
   height: 100%;
 }
 body {
   margin: 0;
-}
-#app {
-  height: 100%;
 }
 a {
   text-decoration: none;
   color: black;
 }
 .wrapper {
-  overflow: hidden;
   min-height: 100%;
   height: 100%;
   display: flex;

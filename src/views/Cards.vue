@@ -16,6 +16,15 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.cards {
 
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        // padding: 20px;
+        background-color: grey;
+    }
+}
 </style>
