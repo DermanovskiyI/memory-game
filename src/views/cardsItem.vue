@@ -1,6 +1,6 @@
 <template>
-    <li class="cards__item">
-       <div class="cards__flip">
+    <li class="cards__item" @click="flipCard">
+       <div class="cards__flip" :class="[active ? 'cards__flip--active' : '']">
            <div class="cards__flip-inner">
                <div class="cards__flip-front">
                    <div class="cards__flip-front-pic">
@@ -15,6 +15,21 @@
     </li>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      active: false,
+    };
+  },
+  methods: {
+    flipCard() {
+      this.active = !this.active;
+    },
+  },
+};
+</script>
+
 <style lang="scss" scoped>
 
 .cards__flip {
@@ -22,6 +37,7 @@
   width: 300px;
   border: 1px solid #f1f1f1;
   perspective: 1000px;
+  user-select: none;
 
   &-inner {
     position: relative;
@@ -31,9 +47,12 @@
     transition: transform 0.8s;
     transform-style: preserve-3d;
   }
-  &:hover &-inner {
+  &--active &-inner {
     transform: rotateY(180deg);
   }
+  // &:hover &-inner {
+  //   transform: rotateY(180deg);
+  // }
   &-front, &-back {
     position: absolute;
     width: 100%;
