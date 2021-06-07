@@ -18,13 +18,11 @@ export default {
 
 <style lang="scss">
 .cards {
-
     &__list {
         display: flex;
         flex-wrap: wrap;
-        justify-content: flex-start;
-        // padding: 20px;
-        background-color: grey;
+        justify-content: center;
+        padding: 20px 50px;
     }
 }
 </style>

@@ -1,9 +1,5 @@
 <template>
-  <div class="wrapper">
-    <div class="container">
-      <router-view/>
-    </div>
-  </div>
+  <router-view/>
 </template>
 
 <style lang="scss">
@@ -17,18 +13,25 @@ a {
   text-decoration: none;
   color: black;
 }
+img {
+  max-width: 100%;
+}
 .wrapper {
   min-height: 100%;
-  height: 100%;
+  background-color: grey;
   display: flex;
   align-items: center;
-  position: relative;
+  justify-content: center;
+
 }
 .container {
 margin: 0 auto;
 width: 95%;
+max-width: 1100px;
+height: 100%;
 display: flex;
 justify-content: center;
+align-items: center;
 }
 ul {
   margin: 0;

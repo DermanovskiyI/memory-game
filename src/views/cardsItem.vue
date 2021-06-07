@@ -7,8 +7,8 @@
                         <img src="../assets/cat.png" alt="cat" class="cards__flip-front-pic-img">
                    </div>
                 </div>
-                <div class="flip-card-back">
-                    <img src="../assets/photo.png" alt="Avatar" style="width:300px;height:300px;">
+                <div class="cards__flip-back">
+                    <img src="../assets/photo.png" alt="pic">
                 </div>
            </div>
        </div>
@@ -31,11 +31,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.cards__item {
+  margin: 10px;
+}
 .cards__flip {
   background-color: transparent;
-  width: 300px;
-  border: 1px solid #f1f1f1;
+  width: 250px;
+  height: 250px;
   perspective: 1000px;
   user-select: none;
 
@@ -50,9 +52,6 @@ export default {
   &--active &-inner {
     transform: rotateY(180deg);
   }
-  // &:hover &-inner {
-  //   transform: rotateY(180deg);
-  // }
   &-front, &-back {
     position: absolute;
     width: 100%;
@@ -67,13 +66,12 @@ export default {
     align-items: center;
     justify-content: center;
   }
-  &-front-pic-img {
-    max-width: 100%;
-  }
+
   &-back {
     background-color: dodgerblue;
     color: white;
     transform: rotateY(180deg);
+    display: flex;
   }
 }
 
