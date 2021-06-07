@@ -42,6 +42,13 @@
       "plugin:vue/vue3-essential",
       "@vue/airbnb"
     ],
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        }
+      }
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     },

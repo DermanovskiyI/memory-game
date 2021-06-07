@@ -1,7 +1,7 @@
 <template>
     <div class="welcome">
         <h1 class="title">Memory Card Game</h1>
-        <router-link to="/Game">Начать игру</router-link>
+        <router-link to="/Cards">Начать игру</router-link>
     </div>
 </template>
 
