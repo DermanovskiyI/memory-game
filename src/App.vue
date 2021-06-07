@@ -1,5 +1,9 @@
 <template>
-  <router-view/>
+  <div class="wrapper">
+    <div class="container">
+      <router-view/>
+    </div>
+  </div>
 </template>
 
 <style lang="scss">
@@ -12,13 +16,23 @@ body {
 #app {
   height: 100%;
 }
+a {
+  text-decoration: none;
+  color: black;
+}
 .wrapper {
   overflow: hidden;
   min-height: 100%;
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  position: relative;
+}
+.container {
+margin: 0 auto;
+width: 95%;
+display: flex;
+justify-content: center;
 }
 ul {
   margin: 0;
@@ -27,14 +41,5 @@ ul {
 h1 {
   margin: 0;
 }
-.start {
-  width: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.title {
-  margin-bottom: 80px;
-}
+
 </style>

@@ -1,5 +1,5 @@
 <template>
     <div>
-        <div>do you think it a game?</div>
+        <div>you think this is a game?</div>
     </div>
 </template>
