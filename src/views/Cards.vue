@@ -1,11 +1,13 @@
 <template>
-    <div class="cards">
-        <button @click="test">push</button>
-        <!-- <pre>{{pictures}}</pre> -->
-        <ul class="cards__list">
-            <cardsItem/>
-        </ul>
-    </div>
+  <div class="cards">
+      <ul class="cards__list">
+          <cardsItem
+              v-for="picture in pictures"
+              :key="picture.id"
+              :picture="picture"
+          />
+      </ul>
+  </div>
 </template>
 
 <script>
@@ -22,16 +24,17 @@ export default {
     }),
   },
   methods: {
-    ...mapActions(['fetchPictures']),
-    test() {
-      this.fetchPictures();
-    },
+    ...mapActions(['uploadPictures']),
+  },
+  created() {
+    this.uploadPictures();
   },
 };
 </script>
 
 <style lang="scss">
 .cards {
+  padding-top: 100px;
     &__list {
         display: flex;
         flex-wrap: wrap;

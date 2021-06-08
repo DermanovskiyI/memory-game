@@ -8,7 +8,7 @@
                    </div>
                 </div>
                 <div class="cards__flip-back">
-                    <img src="../assets/photo.png" alt="pic">
+                    <img :src="picture.webformatURL" alt="pic">
                 </div>
            </div>
        </div>
@@ -17,6 +17,12 @@
 
 <script>
 export default {
+  props: {
+    picture: {
+      type: Object,
+      default: () => {},
+    },
+  },
   data() {
     return {
       active: false,
