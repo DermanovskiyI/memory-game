@@ -33,6 +33,7 @@ export default {
 <style lang="scss" scoped>
 .cards__item {
   margin: 10px;
+  cursor: pointer;
 }
 .cards__flip {
   background-color: transparent;
