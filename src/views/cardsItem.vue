@@ -43,8 +43,8 @@ export default {
 }
 .cards__flip {
   background-color: transparent;
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   perspective: 1000px;
   user-select: none;
 
