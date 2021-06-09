@@ -31,6 +31,7 @@ export default {
   methods: {
     flipCard() {
       this.active = !this.active;
+      // this.active = true;
     },
   },
 };

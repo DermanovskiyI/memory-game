@@ -2,9 +2,9 @@
   <div class="cards">
       <ul class="cards__list">
           <cardsItem
-              v-for="picture in pictures"
-              :key="picture.id"
-              :picture="picture"
+            v-for="picture in pictures"
+            :key="picture.unicId"
+            :picture="picture"
           />
       </ul>
   </div>
@@ -23,11 +23,16 @@ export default {
       pictures: (state) => state.pictures,
     }),
   },
+  data() {
+    return {
+      uniqId: 0,
+    };
+  },
   methods: {
-    ...mapActions(['uploadPictures']),
+    ...mapActions(['setPictures']),
   },
   created() {
-    this.uploadPictures();
+    this.setPictures();
   },
 };
 </script>
