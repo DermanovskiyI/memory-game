@@ -12,6 +12,7 @@ export default createStore({
       state.pictures.forEach((picture) => {
         state.pictures.push(picture);
       });
+      state.pictures.sort(() => Math.random() - 0.5);
     },
   },
   actions: {
