@@ -1,5 +1,5 @@
 <template>
-  <li class="cards__item" @click.stop="flipCard(picture)">
+  <li class="cards__item" @click="flipCard(picture)">
       <div class="cards__flip" :class="[picture.showPic ? 'cards__flip--active' : '']">
           <div class="cards__flip-inner">
               <div class="cards__flip-front">
@@ -28,6 +28,7 @@ export default {
   computed: {
     ...mapState({
       pic: (state) => state.idForCompare,
+      cardCounter: (state) => state.cardCounter,
     }),
   },
   data() {
@@ -38,7 +39,7 @@ export default {
   methods: {
     ...mapMutations(['showPicture', 'checkSimilarPic']),
     flipCard(picture) {
-      if (!picture.showPic) {
+      if (!picture.showPic && this.cardCounter < 2) {
         this.showPicture(picture);
       }
     },

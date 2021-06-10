@@ -5,6 +5,7 @@
             v-for="picture in pictures"
             :key="picture.uniqId"
             :picture="picture"
+            :cardCounter="cardCounter"
           />
       </ul>
   </div>
@@ -21,6 +22,7 @@ export default {
   computed: {
     ...mapState({
       pictures: (state) => state.pictures,
+      cardCounter: (state) => state.cardCounter,
     }),
   },
   methods: {

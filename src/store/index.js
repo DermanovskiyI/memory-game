@@ -6,6 +6,7 @@ export default createStore({
     pictures: [],
     uniqId: 0,
     idForCompare: 0,
+    cardCounter: 0,
   },
   mutations: {
     setUniqId(state) {
@@ -33,7 +34,9 @@ export default createStore({
 
           if (state.idForCompare === 0) {
             state.idForCompare = pictureForCompare.id;
+            state.cardCounter += 1;
           } else if (state.idForCompare !== pictureForCompare.id) {
+            state.cardCounter += 1;
             setTimeout(() => {
               state.pictures.forEach((pictureToHide) => {
                 if (pictureToHide.id === state.idForCompare || pictureToHide.id === pictureForCompare.id) {
@@ -42,6 +45,7 @@ export default createStore({
                 }
               });
               state.idForCompare = 0;
+              state.cardCounter = 0;
             }, 1500);
           } else if (state.idForCompare === pictureForCompare.id) {
             state.idForCompare = 0;
