@@ -1,6 +1,5 @@
 <template>
   <div class="cards">
-    <pre>{{successCounter}}</pre>
       <ul class="cards__list">
           <cardsItem
             v-for="picture in pictures"

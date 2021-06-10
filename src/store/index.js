@@ -4,26 +4,33 @@ import axios from 'axios';
 export default createStore({
   state: {
     pictures: [],
-    uniqId: 0,
-    idForCompare: 0,
-    cardCounter: 0,
-    successCounter: 0,
-    level: 1,
+    uniqId: 0, // to dublicate same pics
+    idForCompare: 0, // to compare the first and second pictures
+    cardCounter: 0, // to disabling more than two pictures
+    successCounter: 0, // to see that all the cards are open
+    level: 1, // to change the difficulty of the game
   },
   mutations: {
     setUniqId(state) {
-      state.pictures = state.pictures.map((picture) => {
+      state.pictures = state.pictures.map((picture) => { // set unique id for dublicate pics
         state.uniqId += 1;
         return {
-          ...picture, uniqId: state.uniqId, showPic: false,
+          ...picture, uniqId: state.uniqId, showPic: true,
         };
       });
     },
     duplicatePictures(state) {
       state.pictures = state.pictures.concat(state.pictures);
     },
-    shufflingPictures(state) {
+    shufflePictures(state) {
       state.pictures.sort(() => Math.random() - 0.5);
+
+      state.pictures.forEach((picture) => { // show picture before start game
+        setTimeout(() => {
+          // eslint-disable-next-line no-param-reassign
+          picture.showPic = false;
+        }, 4000);
+      });
     },
     uploadPictures(state, pictures) {
       state.pictures = pictures;
@@ -35,13 +42,13 @@ export default createStore({
           picture.showPic = true;
 
           if (state.idForCompare === 0) {
-            state.idForCompare = pictureForCompare.id;
-            state.cardCounter += 1;
-          } else if (state.idForCompare !== pictureForCompare.id) {
-            state.cardCounter += 1;
+            state.idForCompare = pictureForCompare.id; // assign id for compare with next card
+            state.cardCounter += 1; // increase card counter for check how many cards are open
+          } else if (state.idForCompare !== pictureForCompare.id) { // if ID's not same pictures must be flip back
+            state.cardCounter += 1; // increase card counter for disable click on another cards
             setTimeout(() => {
               state.pictures.forEach((pictureToHide) => {
-                if (pictureToHide.id === state.idForCompare || pictureToHide.id === pictureForCompare.id) {
+                if (pictureToHide.id === state.idForCompare || pictureToHide.id === pictureForCompare.id) { // flip back first and second pics
                   // eslint-disable-next-line no-param-reassign
                   pictureToHide.showPic = false;
                 }
@@ -49,29 +56,19 @@ export default createStore({
               state.idForCompare = 0;
               state.cardCounter = 0;
             }, 1000);
-          } else if (state.idForCompare === pictureForCompare.id) {
+          } else if (state.idForCompare === pictureForCompare.id) { // if the cards are the same reset cardCounter and idForCompare, and increase success counter
             state.idForCompare = 0;
             state.cardCounter = 0;
             state.successCounter += 2;
           }
-          if (state.successCounter === state.pictures.length) {
+          if (state.successCounter === state.pictures.length) { // if success counter == pictures length go to next level
             state.level += 1;
             state.successCounter = 0;
           }
         }
       });
     },
-    checkSuccess(state) {
-      state.pictures.forEach((picture) => {
-        if (picture.showPic) {
-          state.successCounter += 1;
-          console.log(state.successCounter);
-        }
-        if (state.successCounter === state.pictures.length) {
-          state.level += 1;
-        }
-      });
-    },
+
   },
   actions: {
     setPictures() {
@@ -89,7 +86,7 @@ export default createStore({
           this.commit('uploadPictures', response.data.hits);
           this.commit('duplicatePictures');
           this.commit('setUniqId');
-          this.commit('shufflingPictures');
+          this.commit('shufflePictures');
         })
         .catch((error) => {
           console.log(error);
