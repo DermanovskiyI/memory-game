@@ -7,6 +7,8 @@ export default createStore({
     uniqId: 0,
     idForCompare: 0,
     cardCounter: 0,
+    successCounter: 0,
+    level: 1,
   },
   mutations: {
     setUniqId(state) {
@@ -46,10 +48,27 @@ export default createStore({
               });
               state.idForCompare = 0;
               state.cardCounter = 0;
-            }, 1500);
+            }, 1000);
           } else if (state.idForCompare === pictureForCompare.id) {
             state.idForCompare = 0;
+            state.cardCounter = 0;
+            state.successCounter += 2;
           }
+          if (state.successCounter === state.pictures.length) {
+            state.level += 1;
+            state.successCounter = 0;
+          }
+        }
+      });
+    },
+    checkSuccess(state) {
+      state.pictures.forEach((picture) => {
+        if (picture.showPic) {
+          state.successCounter += 1;
+          console.log(state.successCounter);
+        }
+        if (state.successCounter === state.pictures.length) {
+          state.level += 1;
         }
       });
     },
@@ -58,7 +77,15 @@ export default createStore({
     setPictures() {
       axios.get('https://pixabay.com/api/?key=21981461-82783dc7d980b24f3d6ebf216&q=sport&image_type=photo')
         .then((response) => {
-          response.data.hits.splice(0, 16);
+          if (this.state.level === 1) {
+            response.data.hits.splice(0, 16);
+          }
+          if (this.state.level === 2) {
+            response.data.hits.splice(0, 14);
+          }
+          if (this.state.level === 3) {
+            response.data.hits.splice(0, 12);
+          }
           this.commit('uploadPictures', response.data.hits);
           this.commit('duplicatePictures');
           this.commit('setUniqId');
