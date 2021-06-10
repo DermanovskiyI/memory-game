@@ -1,21 +1,23 @@
 <template>
-    <li class="cards__item" @click="flipCard">
-       <div class="cards__flip" :class="[active ? 'cards__flip--active' : '']">
-           <div class="cards__flip-inner">
-               <div class="cards__flip-front">
-                   <div class="cards__flip-front-pic">
-                        <img src="../assets/cat.png" alt="cat" class="cards__flip-front-pic-img">
-                   </div>
-                </div>
-                <div class="cards__flip-back">
-                    <img :src="picture.webformatURL" alt="pic">
-                </div>
-           </div>
-       </div>
-    </li>
+  <li class="cards__item" @click="flipCard(picture)">
+      <div class="cards__flip" :class="[picture.showPic ? 'cards__flip--active' : '']">
+          <div class="cards__flip-inner">
+              <div class="cards__flip-front">
+                  <div class="cards__flip-front-pic">
+                      <img src="../assets/cat.png" alt="cat" class="cards__flip-front-pic-img">
+                  </div>
+              </div>
+              <div class="cards__flip-back">
+                  <img :src="picture.webformatURL" alt="pic">
+              </div>
+          </div>
+      </div>
+  </li>
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex';
+
 export default {
   props: {
     picture: {
@@ -23,15 +25,20 @@ export default {
       default: () => {},
     },
   },
+  computed: {
+    ...mapState({
+      pic: (state) => state.idForCompare,
+    }),
+  },
   data() {
     return {
       active: false,
     };
   },
   methods: {
-    flipCard() {
-      this.active = !this.active;
-      // this.active = true;
+    ...mapMutations(['showPicture', 'checkSimilarPic']),
+    flipCard(picture) {
+      this.showPicture(picture);
     },
   },
 };

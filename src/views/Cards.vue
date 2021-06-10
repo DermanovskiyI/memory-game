@@ -3,7 +3,7 @@
       <ul class="cards__list">
           <cardsItem
             v-for="picture in pictures"
-            :key="picture.unicId"
+            :key="picture.uniqId"
             :picture="picture"
           />
       </ul>
@@ -22,11 +22,6 @@ export default {
     ...mapState({
       pictures: (state) => state.pictures,
     }),
-  },
-  data() {
-    return {
-      uniqId: 0,
-    };
   },
   methods: {
     ...mapActions(['setPictures']),
