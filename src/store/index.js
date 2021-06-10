@@ -40,10 +40,6 @@ export default createStore({
                   // eslint-disable-next-line no-param-reassign
                   pictureToHide.showPic = false;
                 }
-                // if (pictureToHide.id === pictureForCompare.id) {
-                //   // eslint-disable-next-line no-param-reassign
-                //   pictureToHide.showPic = false;
-                // }
               });
               state.idForCompare = 0;
             }, 1500);

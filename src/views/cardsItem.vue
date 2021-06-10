@@ -1,5 +1,5 @@
 <template>
-  <li class="cards__item" @click="flipCard(picture)">
+  <li class="cards__item" @click.stop="flipCard(picture)">
       <div class="cards__flip" :class="[picture.showPic ? 'cards__flip--active' : '']">
           <div class="cards__flip-inner">
               <div class="cards__flip-front">
@@ -38,7 +38,9 @@ export default {
   methods: {
     ...mapMutations(['showPicture', 'checkSimilarPic']),
     flipCard(picture) {
-      this.showPicture(picture);
+      if (!picture.showPic) {
+        this.showPicture(picture);
+      }
     },
   },
 };
