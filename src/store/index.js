@@ -1,5 +1,5 @@
 import { createStore } from 'vuex';
-import axios from 'axios';
+import picturesModule from './pictures.module';
 
 export default createStore({
   state: {
@@ -61,7 +61,7 @@ export default createStore({
             state.cardCounter = 0;
             state.successCounter += 2;
           }
-          if (state.successCounter === state.pictures.length) { // if success counter == pictures length go to next level
+          if (state.successCounter === state.pictures.length) { // if successCounter == pictures length go to next level
             state.level += 1;
             state.successCounter = 0;
           }
@@ -71,28 +71,16 @@ export default createStore({
 
   },
   actions: {
-    setPictures() {
-      axios.get('https://pixabay.com/api/?key=21981461-82783dc7d980b24f3d6ebf216&q=sport&image_type=photo')
-        .then((response) => {
-          if (this.state.level === 1) {
-            response.data.hits.splice(0, 16);
-          }
-          if (this.state.level === 2) {
-            response.data.hits.splice(0, 14);
-          }
-          if (this.state.level === 3) {
-            response.data.hits.splice(0, 12);
-          }
-          this.commit('uploadPictures', response.data.hits);
-          this.commit('duplicatePictures');
-          this.commit('setUniqId');
-          this.commit('shufflePictures');
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    setPictures({ commit, state }) {
+      const { pictures } = state.picturesModule;
+      const newPictures = pictures.slice(0, 2 + state.level * 2);
+      commit('uploadPictures', newPictures);
+      commit('duplicatePictures');
+      commit('setUniqId');
+      commit('shufflePictures');
     },
   },
   modules: {
+    picturesModule,
   },
 });

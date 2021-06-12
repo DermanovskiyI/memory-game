@@ -4,11 +4,11 @@
           <div class="cards__flip-inner">
               <div class="cards__flip-front">
                   <div class="cards__flip-front-pic">
-                      <img src="../assets/cat.png" alt="cat" class="cards__flip-front-pic-img">
+                      <img src="../assets/cat.png" alt="cat" class="cards__flip-front-pic-img"  draggable="false">
                   </div>
               </div>
               <div class="cards__flip-back">
-                  <img :src="picture.webformatURL" alt="pic">
+                  <img :src="picture.webformatURL" alt="pic" draggable="false">
               </div>
           </div>
       </div>

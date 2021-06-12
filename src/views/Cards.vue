@@ -1,7 +1,7 @@
 <template>
   <div class="cards">
       <ul class="cards__list">
-          <cardsItem
+          <cards-item
             v-for="picture in pictures"
             :key="picture.uniqId"
             :picture="picture"
@@ -18,11 +18,11 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex';
-import cardsItem from './cardsItem.vue';
+import CardsItem from './CardsItem.vue';
 
 export default {
   components: {
-    cardsItem,
+    CardsItem,
   },
   computed: {
     ...mapState({
@@ -38,7 +38,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['setPictures']),
+    ...mapActions(['setPictures', 'getPictures']),
     ...mapMutations(['goToNextLevel']),
     hideModal() {
       this.setPictures();
@@ -51,43 +51,47 @@ export default {
     },
   },
   created() {
-    this.setPictures();
+    this.getPictures();
   },
 };
 </script>
 
 <style lang="scss">
 .cards {
-    &__list {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 20px 50px;
-        border: 1px solid black;
-    }
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px 50px;
+    border: 1px solid black;
+  }
 }
+
 .modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: red;
-    border-radius: 20px;
-    &__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: red;
+  border-radius: 20px;
+
+  &__content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 30px;
-    }
-    &__text {
-      margin-bottom: 20px;
-      color: white;
-    }
-    &__btn {
-      cursor: pointer;
-      padding: 10px;
-      border-radius: 5px;
-    }
+  }
+
+  &__text {
+    margin-bottom: 20px;
+    color: white;
+  }
+
+  &__btn {
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+  }
 }
 </style>
