@@ -37,10 +37,10 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(['showPicture', 'checkSimilarPic']),
+    ...mapMutations(['SHOW_PICTURES']),
     flipCard(picture) {
       if (!picture.showPic && this.cardCounter < 2) {
-        this.showPicture(picture);
+        this.SHOW_PICTURES(picture);
       }
     },
   },

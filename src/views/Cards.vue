@@ -7,22 +7,23 @@
             :picture="picture"
           />
       </ul>
-      <div class="modal" v-show="showModal">
-        <div class="modal__content">
-          <div class="modal__text">ВЫ ПРОШЛИ УРОВЕНЬ!!!!</div>
-          <button type="button" class="modal__btn" @click="hideModal">Следующий уровень</button>
-        </div>
-      </div>
+      <modal
+        :showModal="showModal"
+        v-if="showModal"
+        @hideModal="hideModal"
+      />
   </div>
 </template>
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex';
 import CardsItem from './CardsItem.vue';
+import Modal from './Modal.vue';
 
 export default {
   components: {
     CardsItem,
+    Modal,
   },
   computed: {
     ...mapState({
@@ -64,34 +65,6 @@ export default {
     justify-content: center;
     padding: 20px 50px;
     border: 1px solid black;
-  }
-}
-
-.modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: red;
-  border-radius: 20px;
-
-  &__content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 30px;
-  }
-
-  &__text {
-    margin-bottom: 20px;
-    color: white;
-  }
-
-  &__btn {
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 5px;
   }
 }
 </style>
