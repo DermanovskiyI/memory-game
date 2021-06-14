@@ -52,6 +52,7 @@ export default {
   margin: 10px;
   cursor: pointer;
 }
+
 .cards__flip {
   background-color: transparent;
   width: 200px;
@@ -67,9 +68,11 @@ export default {
     transition: transform 0.8s;
     transform-style: preserve-3d;
   }
+
   &--active &-inner {
     transform: rotateY(180deg);
   }
+
   &-front, &-back {
     position: absolute;
     width: 100%;
@@ -77,6 +80,7 @@ export default {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
   }
+
   &-front {
     background-color: #bbb;
     color: black;

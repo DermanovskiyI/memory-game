@@ -6,16 +6,29 @@
 html, body {
   height: 100%;
 }
+
 body {
   margin: 0;
 }
+
 a {
   text-decoration: none;
   color: black;
 }
+
 img {
   max-width: 100%;
 }
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+h1 {
+  margin: 0;
+}
+
 .wrapper {
   min-height: 100%;
   background-color: grey;
@@ -24,6 +37,7 @@ img {
   justify-content: center;
 
 }
+
 .container {
 margin: 0 auto;
 width: 95%;
@@ -32,14 +46,6 @@ height: 100%;
 display: flex;
 justify-content: center;
 align-items: center;
-}
-ul {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-h1 {
-  margin: 0;
 }
 
 </style>

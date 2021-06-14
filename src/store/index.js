@@ -1,5 +1,8 @@
 import { createStore } from 'vuex';
 import picturesModule from './pictures.module';
+import {
+  SET_UNIQ_ID, DUPLICATE_PICTURES, SHUFFLE_PICTURES, SHOW_PICTURES, UPLOAD_PICTURES,
+} from './mutation.types';
 
 export default createStore({
   state: {
@@ -11,7 +14,7 @@ export default createStore({
     level: 1, // to change the difficulty of the game
   },
   mutations: {
-    setUniqId(state) {
+    [SET_UNIQ_ID](state) {
       state.pictures = state.pictures.map((picture) => { // set unique id for dublicate pics
         state.uniqId += 1;
         return {
@@ -19,10 +22,10 @@ export default createStore({
         };
       });
     },
-    duplicatePictures(state) {
+    [DUPLICATE_PICTURES](state) {
       state.pictures = state.pictures.concat(state.pictures);
     },
-    shufflePictures(state) {
+    [SHUFFLE_PICTURES](state) {
       state.pictures.sort(() => Math.random() - 0.5);
 
       state.pictures.forEach((picture) => { // show picture before start game
@@ -32,10 +35,10 @@ export default createStore({
         }, 4000);
       });
     },
-    uploadPictures(state, pictures) {
+    [UPLOAD_PICTURES](state, pictures) {
       state.pictures = pictures;
     },
-    showPicture(state, pictureForCompare) {
+    [SHOW_PICTURES](state, pictureForCompare) {
       state.pictures.forEach((picture) => {
         if (picture.uniqId === pictureForCompare.uniqId) {
           // eslint-disable-next-line no-param-reassign
@@ -74,10 +77,10 @@ export default createStore({
     setPictures({ commit, state }) {
       const { pictures } = state.picturesModule;
       const newPictures = pictures.slice(0, 2 + state.level * 2);
-      commit('uploadPictures', newPictures);
-      commit('duplicatePictures');
-      commit('setUniqId');
-      commit('shufflePictures');
+      commit(UPLOAD_PICTURES, newPictures);
+      commit(DUPLICATE_PICTURES);
+      commit(SET_UNIQ_ID);
+      commit(SHUFFLE_PICTURES);
     },
   },
   modules: {
